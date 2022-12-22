@@ -1,9 +1,10 @@
 import token from "./tokenGenrate";
+import roomDetails from "./getRoomDetails";
 import checkin from "./getCheckin";
-import getUser from "./getUsers";
 
 export default {
     token,
+    roomDetails,
     checkin,
-    getUser
+     
 }
