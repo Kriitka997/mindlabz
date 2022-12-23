@@ -5,12 +5,7 @@ import { Request, Response } from "express";
 export default {
     createToken: async (req: Request, res: Response) => {
 
-        const userIDs = {
-            vendorId: req.body.vendorId,
-            hotelId: req.body.hotelId
-        };
-
-        const genRatedToken = jwt.sign({ vendorIds: userIDs }, "token", {
+        const genRatedToken = jwt.sign({ ID: "57324" }, "token", {
             expiresIn: '365d'
         })
         res.send({

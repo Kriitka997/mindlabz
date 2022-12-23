@@ -1,10 +1,11 @@
 import token from "./tokenGenrate";
+import getBooking from "./getBooking";
+import getUsers from "./getUsers";
 import roomDetails from "./getRoomDetails";
-import checkin from "./getCheckin";
 
 export default {
     token,
-    roomDetails,
-    checkin,
-     
+    getBooking,
+    getUsers,
+    roomDetails
 }

@@ -4,23 +4,27 @@ import getBooking from "../controller/getBooking";
 const route = express.Router();
 
 import controllerIndex from "../controller/index";
-import login from "../helper/login";
-import middleware from "../middleware/index";
+// import helper from "../helper/index";
+// import middleware from "../middleware/index";
+
 
 route.post("/token", controllerIndex.token.createToken);
-route.get(
-  "/getRoomDetails",
-  middleware.tokenVer.verifyToken,
-  controllerIndex.roomDetails.gettingRoomDetails
-);
-route.get(
-  "/getCheckIn",
-  middleware.tokenVer.verifyToken,
-  controllerIndex.checkin.getCheckInDetails
-);
+
+route.get('/roomDetails', controllerIndex.roomDetails.detailsOfRoom)
+
+// route.get(
+//   "/wsAuth",
+//   helper.wsAuth.getingWsAuthKeys
+// );
+
+// route.get(
+//   "/getUsers",
+//   controllerIndex.getUsers.getUsers
+// );
 
 
-route.post("/login", login);
-route.post("/getBooking", getBooking);
+// route.post("/login", helper.login);
+
+// route.get("/getBooking", controllerIndex.getBooking);
 
 export default route;
