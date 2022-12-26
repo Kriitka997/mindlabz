@@ -19,43 +19,5 @@ export default {
         );
         const result = getUsersDetails.data.hotelogix.response;
         return result;
-
-        // if (result.status.message == "success") {
-        //     const loginBodyData = {
-        //         "hotelogix": {
-        //             "version": "1.0",
-        //             "datetime": "2022-12-23T15:55:00+05:30",
-        //             "request": {
-        //                 "method": "login",
-        //                 "key": consumerKey,
-        //                 "data": {
-        //                     "hotelId": 57324,
-        //                     "counterId": "QnFEZU9XK2o5bXc9",
-        //                     "email": "Simbalodges2@hotelogix.com",
-        //                     "forceOpenCouner": true,
-        //                     "forceLogin": true
-        //                 }
-        //             }
-        //         }
-        //     };
-            
-        //     const signatureForLogin = await hotelogixSignature.createSignature(loginBodyData, consumerSecret);
-
-        //     if (signatureForLogin.length!=0) {
-
-        //         loginFunction.login(loginBodyData, signatureForLogin)
-        //     }
-        //     else {
-        //         return {
-        //             message: "please create signature first.."
-        //         }
-        //     }
-        // }
-        // else {
-        //     return {
-        //         error: result
-        //     }
-        // };
-
     }
 }

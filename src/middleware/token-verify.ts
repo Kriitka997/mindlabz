@@ -6,7 +6,7 @@ export default {
 
     verifyToken: async (req: Request, res: Response, next: NextFunction) => {
 
-        const authToken:any = req.headers.token;
+        const authToken:any = req.query.token;        
 
         jwt.verify(authToken, 'token', (err: any, user: any) => {
             if (err) {
@@ -15,7 +15,7 @@ export default {
                     error: message.invalid
                 })
             }
-            else {
+            else {                
                 req.params = user;
                 next()
             }

@@ -115,44 +115,51 @@ export default {
 
                                     if (getBookingResponse.status.message === "success") {
 
-                                        let bookingDetails = {
-                                            room_no: '',
-                                            checkin_id: '',
-                                            adult: 0,
-                                            guest_name: '',
-                                            first_name: '',
-                                            last_name: '',
-                                            mobileNo: '',
-                                            checkOutDate: '',
-                                        };
+                                        let singleRoom: any = [];
+                                        let allRooms: any = [];
+                                        
+                                        
                                         getBookingResponse.bookings.forEach((booking: any) => {
-                                            bookingDetails['room_no'] = roomNo;
-                                            bookingDetails['checkin_id'] = booking.guestStays[0].id;
-                                            bookingDetails['adult'] = 1;
-                                            bookingDetails['guest_name'] = booking.guestStays[0].guestDetails.fName + " " + booking.guestStays[0].guestDetails.lName;
-                                            bookingDetails['first_name'] = booking.guestStays[0].guestDetails.fName;
-                                            bookingDetails['last_name'] = booking.guestStays[0].guestDetails.lName;
-                                            bookingDetails['mobileNo'] = booking.guestStays[0].guestDetails.mobileNo;
-                                            bookingDetails['checkOutDate'] = booking.guestStays[0].checkOutDate;
-
+                                            let roomDetails = {
+                                                room_no: '',
+                                                checkin_id: '',
+                                                checkin_date: '',
+                                                adult: 0,
+                                                guest_name: '',
+                                                first_name: '',
+                                                last_name: '',
+                                                mobileNo: '',
+                                                checkOutDate: '',
+                                            };
+                                            if(roomNo == booking.roomStays[0].roomName) {
+                                                roomDetails['room_no'] = booking.roomStays[0].roomName;
+                                                roomDetails['checkin_id'] = booking.guestStays[0].id;
+                                                roomDetails['checkin_date'] = booking.guestStays[0].checkInDate;
+                                                roomDetails['adult'] = 1;
+                                                roomDetails['guest_name'] = booking.guestStays[0].guestDetails.fName + " " + booking.guestStays[0].guestDetails.lName;
+                                                roomDetails['first_name'] = booking.guestStays[0].guestDetails.fName;
+                                                roomDetails['last_name'] = booking.guestStays[0].guestDetails.lName;
+                                                roomDetails['mobileNo'] = booking.guestStays[0].guestDetails.mobileNo;
+                                                roomDetails['checkOutDate'] = booking.guestStays[0].checkOutDate;
+                                                singleRoom.push(roomDetails);
+                                            } else {
+                                                roomDetails['room_no'] = booking.roomStays[0].roomName;
+                                                roomDetails['checkin_id'] = booking.guestStays[0].id;
+                                                roomDetails['checkin_date'] = booking.guestStays[0].checkInDate;
+                                                roomDetails['adult'] = 1;
+                                                roomDetails['guest_name'] = booking.guestStays[0].guestDetails.fName + " " + booking.guestStays[0].guestDetails.lName;
+                                                roomDetails['first_name'] = booking.guestStays[0].guestDetails.fName;
+                                                roomDetails['last_name'] = booking.guestStays[0].guestDetails.lName;
+                                                roomDetails['mobileNo'] = booking.guestStays[0].guestDetails.mobileNo;
+                                                roomDetails['checkOutDate'] = booking.guestStays[0].checkOutDate;
+                                                allRooms.push(roomDetails);
+                                            }
                                         });
-
-
-                                        // const filterByRoomNo = detailsOfUser[0].filter((Rno: any) => {
-                                        //     if (Rno.roomName == roomNo) {
-                                        //         res.send({
-                                        //             status: 200,
-                                        //             message: "Room Details retrived successfully.",
-                                        //             result: detailsOfUser
-                                        //         });
-                                        //     }
-
-                                        // });
 
                                         res.send({
                                             status: 200,
                                             message: "Room Details retrived successfully.",
-                                            result: bookingDetails
+                                            result: roomNo ? singleRoom : allRooms
                                         });
 
 

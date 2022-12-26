@@ -5,12 +5,12 @@ const route = express.Router();
 
 import controllerIndex from "../controller/index";
 // import helper from "../helper/index";
-// import middleware from "../middleware/index";
+import middleware from "../middleware/index";
 
 
 route.post("/token", controllerIndex.token.createToken);
 
-route.get('/roomDetails', controllerIndex.roomDetails.detailsOfRoom)
+route.get('/roomDetails', middleware.tokenVer.verifyToken,controllerIndex.roomDetails.detailsOfRoom)
 
 // route.get(
 //   "/wsAuth",

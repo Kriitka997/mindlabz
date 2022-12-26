@@ -11,26 +11,6 @@ async function getBooking(bodyData: any, signature: any) {
   });
   const response = await loginDetails.data.hotelogix.response;
   return response;
-
-  // if (response.status.message === "success") {
-    // response.bookings.forEach((booking: any) => {
-    //   return booking.roomStays;
-
-    // });
-  //   // console.log(response.bookings[0].rommStays,"responseresponseresponseresponse")
-  //   // return {
-  //   //   fName: response.bookings.guestStays.guestDetails.fName,
-  //   //   lName: response.bookings.guestStays.guestDetails.lName,
-  //   //   email: response.bookings.guestStays.guestDetails.email,
-  //   //   reservationStatus: response.bookings.reservationStatus,
-  //   //   roomId: response.bookingsroomId,
-  //   //   roomName: response.bookingsroomName,
-  //   // };
-  // } else {
-  //   return {
-  //     status: response.status,
-  //   };
-  // }
 }
 
 export default getBooking;
