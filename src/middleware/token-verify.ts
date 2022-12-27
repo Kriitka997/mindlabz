@@ -9,9 +9,10 @@ export default {
         const authToken:any = req.query.token;        
 
         jwt.verify(authToken, 'token', (err: any, user: any) => {
+            
             if (err) {
                 res.send({
-                    status: 404,
+                    status: 401,
                     error: message.invalid
                 })
             }
