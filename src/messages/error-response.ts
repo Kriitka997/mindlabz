@@ -1,6 +1,6 @@
 export default {
-    invalid: { statusCode: 401, message: "Invalid token" },
-    forbidden: { statusCode: 403, message: "Forbidden" },
+    invalid: { statusCode: 401, message: "Invalid token" }, //verify token
+    forbidden: { statusCode: 403, message: "Forbidden" }, //not matched
     notFound: { statusCode: 404, message: "token not found" },
     serverError: { statusCode: 500, message: "Internal server error" },
     parameters: { statusCode: 500, message: "query parameters are not valid" },
