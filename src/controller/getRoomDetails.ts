@@ -132,14 +132,14 @@ async function loginAPICall(consumerKeyExits: any) {
 }
 
 async function getBookingDetailsAPICall(accessData: any, roomNo: any) {
-    
+
     const bookingData = {
         "hotelogix": {
             "version": "1.0",
             "datetime": currentDateTime,
             "request": {
                 "method": "getbookings",
-                "key": accessData.loginAccessKey,
+                "key": accessData.accesskey,
                 "data": {
                     "fromDate": "2020-10-13",
                     "toDate": "2020-10-13",
@@ -158,7 +158,7 @@ async function getBookingDetailsAPICall(accessData: any, roomNo: any) {
         }
     };
 
-    const signatureForBooking = await hotelogixSign.createSignature(bookingData, accessData.loginAccessSecret);
+    const signatureForBooking = await hotelogixSign.createSignature(bookingData, accessData.accesssecret);
 
     const getBookingResponse = await getBooking(bookingData, signatureForBooking);
 
@@ -217,6 +217,7 @@ async function getBookingDetailsAPICall(accessData: any, roomNo: any) {
         }
     }
 }
+
 export default {
     detailsOfRoom: async (req: Request, res: Response) => {
         let wsAuthAccessData: any;
@@ -248,44 +249,33 @@ export default {
                     // calling login api
                     const loginReturn = await loginAPICall(getUserReturn);
 
-                    loginAccessData = loginReturn;
+                    loginAccessData = {
+                        accesskey: loginReturn.accesskey,
+                        accesssecret: loginReturn.accesssecret
+                    };
 
                     //calling get bookings details api
 
                     const getBookingReturn = await getBookingDetailsAPICall(loginAccessData, roomNo);
 
                     //sending response to vendor
-                    if (getBookingReturn.status) {
-                        return res.send({
-                            path: "get Bookings",
-                            status: getBookingReturn.status,
 
-                        })
-                    }
-                    else {
-                        res.send({
-                            status: 200,
-                            message: "Room Details retrived successfully.",
-                            result: getBookingReturn.returnValue
-                        })
-                    }
+                    res.send({
+                        status: 200,
+                        message: "Room Details retrived successfully.",
+                        result: getBookingReturn.returnValue
+                    })
+
                 }
                 // if consumer key is founded in db then calling get booking details api directly.. 
                 else {
                     const loginAccessData = {
-                        loginAccessKey: consumerKeyExits.loginAccessKey,
-                        loginAccessSecret: consumerKeyExits.loginAccessSecret,
+                        accesskey: consumerKeyExits.loginAccessKey,
+                        accesssecret: consumerKeyExits.loginAccessSecret,
                     };
 
                     const getBookingReturn = await getBookingDetailsAPICall(loginAccessData, roomNo);
 
-                    if (getBookingReturn.status) {
-                        return res.send({
-                            path: "get Bookings",
-                            status: getBookingReturn.status,
-
-                        })
-                    }
                     res.send({
                         status: 200,
                         message: "Room Details retrived successfully.",
